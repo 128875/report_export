@@ -1,0 +1,58 @@
+# Tomcat
+server:
+  port: 8088
+# spring配置
+Spring:
+  application:
+    name: InvoiceExport
+  datasource:
+    url: jdbc:mysql://192.168.9.26/invoice_template?characterEncoding=utf8&serverTimezone=PRC
+    username: root
+    password: xuze123
+    #    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    name: datasource
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 10
+      max-active: 100
+      max-wait: 60000
+      min-idle: 10
+      validation-query: SELECT 1
+      test-on-borrow: false
+      test-on-return: false
+      min-evictable-idle-time-millis: 300000
+      test-while-idle: true
+      time-between-eviction-runs-millis: 30000
+      max-pool-prepared-statement-per-connection-size: 20
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+
+sa-token:
+  # token名称 (同时也是cookie名称)
+  token-name: satoken
+  # token有效期，单位s 默认30天, -1代表永不过期
+  timeout: 2592000
+  # token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
+  activity-timeout: -1
+  # 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
+  is-concurrent: true
+  # 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
+  is-share: true
+  # token风格
+  token-style: uuid
+  # 是否输出操作日志
+  is-log: false
+
+# mybatis-plus配置
+mybatis-plus:
+  mapper-locations: classpath:mappers/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    defaultStatementTimeout: 60
+  type-aliases-package: org.Hooya.entity
+
+DataRequireUrl: http://192.168.9.75:9577/eu/report/
+TemplatePdf: D:\Code_Space\FileData\HooyaInvoice\templatePdf\
+TemplateDic: D:\Code_Space\FileData\HooyaInvoice\templateDic2\
+TemplateExportBatchDic: D:\Code_Space\FileData\HooyaInvoice\templateExportBatchDic2\

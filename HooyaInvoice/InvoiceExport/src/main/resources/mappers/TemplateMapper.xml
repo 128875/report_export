@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.Hooya.mapper.TemplateMapper">
+
+    <resultMap type="Template" id="InvoiceTemplate">
+        <result property="id" column="id"/>
+        <result property="templateName" column="template_name"/>
+        <result property="country" column="country"/>
+        <result property="dianpu" column="dianpu"/>
+        <result property="path" column="path"/>
+        <result property="pdfpath" column="pdfpath"/>
+    </resultMap>
+
+    <select id="getTemplates" parameterType="java.lang.String" resultMap="InvoiceTemplate">
+        SELECT
+            template_name,country,dianpu,path,pdfpath,unit,type
+        FROM
+            t_template
+        WHERE dianpu = #{dianpu} and country = #{country}
+    </select>
+
+</mapper>
